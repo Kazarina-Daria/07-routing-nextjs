@@ -23,14 +23,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  sidebar,
 }: Readonly<{
   children: React.ReactNode;
+  sidebar: React.ReactNode;
 }>) {
   return (
     <html lang="en">
        <body >
       <TanstackProvider>
         <Header />
+        {sidebar}
         {children}
         <Footer />
         <div id="modal-root" />
