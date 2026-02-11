@@ -22,6 +22,7 @@ export default function NotesClient({tag}: NotesClientProps) {
   const [onQuery, setOnQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
+ const [searchInputValue, setSearchInputValue] = useState("");
 
   const closeModal = () => setModalOpen(false);
   const openModal = () => setModalOpen(true);
@@ -37,7 +38,7 @@ export default function NotesClient({tag}: NotesClientProps) {
 
   const onFound = useDebouncedCallback((value: string) => {
     setOnQuery(value);
-    setCurrentPage(0);
+    setCurrentPage(1);
   }, 250);
   return (
     <div className={css.app}>
