@@ -20,7 +20,7 @@ interface NotesClientProps {
 
 export default function NotesClient({tag}: NotesClientProps) {
   const [onQuery, setOnQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
 
   const closeModal = () => setModalOpen(false);
@@ -29,7 +29,7 @@ export default function NotesClient({tag}: NotesClientProps) {
   const { id } = useParams<{ id: string }>();
   const { data, isSuccess, isLoading, isError } = useQuery({
     queryKey: ["notes", currentPage, onQuery, tag],
-    queryFn: () => fetchNotes(onQuery, currentPage + 1, 12, tag),
+    queryFn: () => fetchNotes(onQuery, currentPage, 12, tag),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
   });
