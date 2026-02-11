@@ -22,7 +22,7 @@ export default async function NoteDetailsPage({
 
   return (
     <HydrationBoundary state={dehydrate(qc)}>
-      <NoteDetails />
+      <NoteDetails  />
     </HydrationBoundary>
   );
 }

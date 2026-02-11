@@ -3,7 +3,7 @@
 import css from "./Modal.module.css";
 import { createPortal } from "react-dom";
 import React, { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 interface ModalProps {
   onClose: () => void;
