@@ -20,9 +20,9 @@ interface NotesClientProps {
 
 export default function NotesClient({tag}: NotesClientProps) {
   const [onQuery, setOnQuery] = useState("");
+  const [searchInputValue, setSearchInputValue] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [modalOpen, setModalOpen] = useState(false);
- const [searchInputValue, setSearchInputValue] = useState("");
 
   const closeModal = () => setModalOpen(false);
   const openModal = () => setModalOpen(true);
@@ -46,7 +46,13 @@ export default function NotesClient({tag}: NotesClientProps) {
         <button className={css.button} onClick={openModal}>
           Create note +
         </button>
-        <SearchBox value={onQuery} onChange={onFound} />
+        <SearchBox
+          value={searchInputValue}
+          onChange={(value) => {
+            setSearchInputValue(value);
+            onFound(value);
+          }}
+        />
         {data && data.totalPages !== undefined && (
           <Pagination
             pageCount={totalPages ?? 0}
