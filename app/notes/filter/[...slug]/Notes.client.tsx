@@ -12,9 +12,10 @@ import Pagination from "../../../../components/Pagination/Pagination";
 import Modal from "../../../../components/Modal/Modal";
 import NoteForm from "../../../../components/NoteForm/NoteForm";
 import { useParams } from "next/navigation";
+import type {NoteTag} from "@/lib/api";
 
 interface NotesClientProps {
-  tag?: string; 
+  tag?: NoteTag | "all"; 
 }
 
 export default function NotesClient({tag}: NotesClientProps) {
@@ -27,7 +28,7 @@ export default function NotesClient({tag}: NotesClientProps) {
 
   const { id } = useParams<{ id: string }>();
   const { data, isSuccess, isLoading, isError } = useQuery({
-    queryKey: ["note", currentPage, onQuery, tag],
+    queryKey: ["notes", currentPage, onQuery, tag],
     queryFn: () => fetchNotes(onQuery, currentPage + 1, 12, tag),
     placeholderData: keepPreviousData,
     refetchOnMount: false,

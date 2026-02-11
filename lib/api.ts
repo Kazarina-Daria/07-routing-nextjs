@@ -8,16 +8,18 @@ export interface FetchNotesResponse {
   totalPages: number;
 }
 
+export type NoteTag = 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
+
 const ACCESS_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
-export const fetchNotes= async (onQuery : string, page: number, perPage: number, tag?: string) : Promise<FetchNotesResponse>=> {
+export const fetchNotes= async (onQuery : string, page: number, perPage: number, tag?: NoteTag | "all") : Promise<FetchNotesResponse>=> {
     const res = await axios.get<FetchNotesResponse>(BASE_URL + "/notes", {
         headers: {
             Authorization: `Bearer ${ACCESS_TOKEN}`,
         },
         params: {
             page,
-            perPage : 12,
+            perPage,
   ...(onQuery ? { search: onQuery } : {}),
       ...(tag ? tag !== "all" ? { tag } : {} : {}),
         },

@@ -1,4 +1,4 @@
-import {fetchNotes} from "@/lib/api";
+import {fetchNotes, NoteTag} from "@/lib/api";
 import { dehydrate, HydrationBoundary, QueryClient } from "@tanstack/react-query";
 import NotesClient from "./Notes.client";
 interface Props {
@@ -10,7 +10,7 @@ export default async function FilterPage ({params} :  Props){
 const resolvedParams= await params;
 const slug = resolvedParams.slug || [];
 const filter = slug[0] ?? "all";
-const tag = filter === "all" ? undefined : filter;
+const tag = (filter === "all" ? "all" : filter) as NoteTag | "all";
 const res = await fetchNotes("", 1, PER_PAGE, tag);
   const qc = new QueryClient();
 await qc.prefetchQuery({
